@@ -1,0 +1,153 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+.estudent-bg-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.estudent-bg-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.background-3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.login-container {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 30px 40px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  width: 340px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(6px);
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4e54c4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3b40b6;
+}
+
+#errorMsg {
+  color: rgb(180, 6, 6);
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.estudent-navbar {
+  width: 100vw;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(31,38,135,0.07);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding: 0;
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 60px;
+}
+
+.nav-logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #4e54c8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #4e54c8;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.nav-links li a:hover {
+  color: #8f94fb;
+}
+
+.estudent-footer {
+  width: 100vw;
+  background: #fff;
+  box-shadow: 0 -2px 8px rgba(31,38,135,0.07);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 1rem;
+  color: #4e54c8;
+}
+
+.recaptcha-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 0 0;
+}
