@@ -1,0 +1,11 @@
+/.env
+/.qodo
+/chatgpt-script.js
+/chatgpt-style.css
+/chatgpt.html
+/node_modules
+/package-lock.json
+/package.json
+/script.js
+/server.js
+/style.css
