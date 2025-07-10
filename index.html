@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="e-student is a modern, responsive student management system with a sleek design and advanced features.">
+  <meta name="keywords" content="e-student, student management, education, school, college, university, responsive design, modern UI">
+  <meta name="author" content="e-student Team">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>e-student Demo</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="icon" href="https://e-student.netlify.app/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <!-- Navigation bar -->
+  <nav class="estudent-navbar">
+    <div class="nav-content">
+      <span class="nav-logo"><i class="fas fa-graduation-cap"></i> e-student</span>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#" id="navSignUp">Sign Up</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Top SVG background (e-student style) -->
+  <div class="estudent-bg-top">
+    <svg viewBox="0 0 1440 320" width="100%" height="180" preserveAspectRatio="none" style="display:block;"><path fill="#a8edea" fill-opacity="1" d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,133.3C840,107,960,85,1080,101.3C1200,117,1320,171,1380,197.3L1440,224L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg>
+  </div>
+  <div class="background-3d">
+    <!-- 3D/creative SVG illustration -->
+    <svg viewBox="0 0 800 600" width="100%" height="100%" style="position:absolute;top:0;left:0;z-index:0;">
+      <defs>
+        <radialGradient id="grad1" cx="50%" cy="50%" r="80%">
+          <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1;" />
+          <stop offset="100%" style="stop-color:#fed6e3;stop-opacity:1;" />
+        </radialGradient>
+        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fcb69f;stop-opacity:1;" />
+          <stop offset="100%" style="stop-color:#ffecd2;stop-opacity:1;" />
+        </linearGradient>
+      </defs>
+      <ellipse cx="400" cy="300" rx="350" ry="200" fill="url(#grad1)" opacity="0.5"/>
+      <ellipse cx="600" cy="100" rx="120" ry="60" fill="url(#grad2)" opacity="0.7"/>
+      <ellipse cx="200" cy="500" rx="100" ry="40" fill="#fff" opacity="0.2"/>
+      <ellipse cx="700" cy="550" rx="60" ry="20" fill="#fff" opacity="0.15"/>
+      <circle cx="650" cy="200" r="40" fill="#fff" opacity="0.12"/>
+      <circle cx="120" cy="120" r="60" fill="#fff" opacity="0.18"/>
+    </svg>
+  </div>
+  <div class="login-container">
+    <h2 id="formTitle">Login</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <p id="errorMsg"></p>
+      <p>Don't have an account? <a href="#" id="showSignUp">Sign-in</a></p>
+      <p><a href="#" id="showForgot">Forgot Password?</a></p>
+    </form>
+    <form id="signUpForm" style="display:none;">
+      <input type="text" id="newContact" placeholder="Enter your email or phone number" required>
+      <div class="g-recaptcha" data-sitekey="6LcqrnQrAAAAABPm3bjSc9n3bVOPD50ZuA6DU589"></div>
+      <br>
+      <button type="submit">Sign Up</button>
+      <br><br>
+      <div id="g_id_onload"
+           data-client_id="979861836386-b4ce3ttd6gle4g139gq1e6u006iseuuc.apps.googleusercontent.com"
+           data-context="signup"
+           data-ux_mode="popup"
+           data-callback="handleGoogleSignUp"
+           data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+           data-type="standard"
+           data-shape="rectangular"
+           data-theme="outline"
+           data-text="sign_in_with"
+           data-size="large"
+           data-logo_alignment="left">
+      </div>
+      <p id="signUpMsg"></p>
+      <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+    </form>
+    <form id="forgotForm" style="display:none;">
+      <input type="text" id="forgotInput" placeholder="Enter your username, email or phone" required>
+      <button type="submit">Send OTP</button>
+      <p id="forgotMsg"></p>
+      <p><a href="#" id="backToLogin">Back to Login</a></p>
+    </form>
+    <form id="otpForm" style="display:none;">
+      <input type="text" id="otpInput" placeholder="Enter OTP" required>
+      <button type="submit" id="verifyOtpBtn">Verify OTP</button>
+      <button type="button" id="resendOtpBtn">Re-send OTP</button>
+      <p id="otpMsg"></p>
+    </form>
+    <form id="resetForm" style="display:none;">
+      <input type="password" id="resetPassword" placeholder="New Password" required>
+      <input type="password" id="resetConfirmPassword" placeholder="Confirm New Password" required>
+      <button type="submit">Reset Password</button>
+      <p id="resetMsg"></p>
+    </form>
+    <!-- Add this div for the Google sign-in success message -->
+    <div id="googleSignInMsg" style="display:none;" class="success-msg"></div>
+  </div>
+  <!-- Bottom SVG background (e-student style) -->
+  <div class="estudent-bg-bottom">
+    <svg viewBox="0 0 1440 320" width="100%" height="180" preserveAspectRatio="none" style="display:block;"><path fill="#fed6e3" fill-opacity="1" d="M0,288L60,272C120,256,240,224,360,197.3C480,171,600,149,720,154.7C840,160,960,192,1080,197.3C1200,203,1320,181,1380,170.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+  <footer class="estudent-footer">
+    <div class="footer-content">
+      All rights reserved | Copyrights © e-student
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <!-- AI Chatbot Widget (inline, not iframe) -->
+  <!-- Use the chatbot markup from chatgpt.html for consistency -->
+  <div id="chatbot-container" class="chatbot-container techpearl-style">
+    <div id="chatbot-header" class="chatbot-header chatbot-header-btn" style="display:flex;align-items:center;justify-content:center;cursor:pointer;" title="Click to close chatbot">
+      <span style="color:#1976d2;font-weight:700;font-size:1.08rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">e-student Demo AI Chatbot</span>
+    </div>
+    <div id="chatbot-messages" class="chatbot-messages"></div>
+    <form id="chatbot-form" class="chatbot-form">
+      <input type="text" id="chatbot-input" placeholder="Type your message..." autocomplete="off" required />
+      <button type="submit"><i class="fas fa-paper-plane"></i></button>
+    </form>
+  </div>
+  <button id="openChatbot" class="open-chatbot-btn" title="Chatbot" aria-label="Open Chatbot">💬</button>
+  <link rel="stylesheet" href="chatgpt-style.css">
+  <script src="chatgpt-script.js"></script>
+  <script>
+    // Make chatbot header clickable to close the chatbot
+    var chatbotHeader = document.getElementById('chatbot-header');
+    var chatbot = document.getElementById('chatbot-container');
+    var openBtn = document.getElementById('openChatbot');
+    if (chatbotHeader && chatbot && openBtn) {
+      chatbotHeader.addEventListener('click', function() {
+        chatbot.classList.remove('active');
+        openBtn.style.display = 'flex';
+      });
+    }
+  </script>
+</body>
+</html>
