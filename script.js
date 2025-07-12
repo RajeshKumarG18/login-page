@@ -410,14 +410,14 @@ resetForm.addEventListener('submit', function(event) {
   }
 });
 
-// Ensure login form is visible and others are hidden on page load
-window.addEventListener('DOMContentLoaded', function() {
-  loginForm.style.display = 'block';
-  signUpForm.style.display = 'none';
-  forgotForm.style.display = 'none';
-  otpForm.style.display = 'none';
-  resetForm.style.display = 'none';
-});
+/* Removed conflicting DOMContentLoaded event listener that forcibly shows login form and hides others to allow localStorage-based form state restoration to work properly */
+// window.addEventListener('DOMContentLoaded', function() {
+//   loginForm.style.display = 'block';
+//   signUpForm.style.display = 'none';
+//   forgotForm.style.display = 'none';
+//   otpForm.style.display = 'none';
+//   resetForm.style.display = 'none';
+// });
 
 // Google Sign Up/Sign In callback
 function handleGoogleSignUp(response) {
