@@ -8,32 +8,65 @@ document.addEventListener('DOMContentLoaded', function() {
   const messages = document.getElementById('chatbot-messages');
   const chatbotHeader = document.getElementById('chatbot-header');
 
-  function appendMessage(text, sender) {
-    const msg = document.createElement('div');
-    msg.className = sender === 'user' ? 'user-msg' : 'bot-msg';
-    msg.textContent = text;
-    messages.appendChild(msg);
-    messages.scrollTop = messages.scrollHeight;
+  // Use the same message box style as addChatbotMessage
+  function appendMessage(text, sender = 'bot') {
+    const messagesContainer = document.getElementById('chatbot-messages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `chatbot-message ${sender}`;
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.textContent = text;
+    msgDiv.appendChild(bubble);
+    messagesContainer.appendChild(msgDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    return bubble;
   }
 
-  // --- ChatGPT API integration ---
-  async function fetchChatGPTResponse(message) {
+  // --- Ollama API integration ---
+  async function fetchOllamaResponseStream(message, onChunk) {
     try {
-      const response = await fetch('http://localhost:4000/api/chatgpt', {
+      const response = await fetch('http://127.0.0.1:11434/api/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({
+          model: 'phi3',
+          prompt: message,
+          stream: true
+        })
       });
       if (!response.ok) {
         throw new Error(`Server error: ${response.statusText}`);
       }
-      const data = await response.json();
-      return data.reply || "🤖 No reply from AI.";
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let fullText = '';
+      let done = false;
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        if (value) {
+          const chunk = decoder.decode(value, { stream: true });
+          // Ollama streams JSON lines, one per chunk
+          const lines = chunk.split('\n').filter(Boolean);
+          for (const line of lines) {
+            try {
+              const data = JSON.parse(line);
+              if (data.response) {
+                fullText += data.response;
+                if (onChunk) onChunk(fullText);
+              }
+            } catch (e) {
+              // Ignore JSON parse errors for incomplete chunks
+            }
+          }
+        }
+      }
+      return fullText || "🤖 No reply from Ollama.";
     } catch (error) {
-      console.error('Error fetching ChatGPT response:', error);
-      return "Sorry, there was an error connecting to the AI service.";
+      console.error('Error fetching Ollama response:', error);
+      return "Sorry, there was an error connecting to the Ollama AI service.";
     }
   }
 
@@ -47,16 +80,11 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!input) return;
       if (typeof addChatbotMessage === 'function') addChatbotMessage(input, 'user');
       inputElem.value = '';
-      // Show typing indicator
-      if (typeof addChatbotMessage === 'function') addChatbotMessage('...', 'bot', true);
-      // Fetch mock ChatGPT response
-      const response = await fetchChatGPTResponse(input);
-      // Remove typing indicator
-      const messagesDiv = document.getElementById('chatbot-messages');
-      if (messagesDiv && messagesDiv.lastChild && messagesDiv.lastChild.classList.contains('bot')) {
-        messagesDiv.removeChild(messagesDiv.lastChild);
-      }
-      if (typeof addChatbotMessage === 'function') addChatbotMessage(response, 'bot');
+      // Show typing indicator in a single bubble, then stream update it
+      let botBubble = appendMessage('...', 'bot');
+      await fetchOllamaResponseStream(input, (partial) => {
+        if (botBubble) botBubble.textContent = partial;
+      });
     });
   }
 
